@@ -21,18 +21,12 @@ public class ResponsiveUIExecutor implements Executor {
 	 */
 	@Override
 	public void execute(Runnable r) {
-		synchronized (t1) {
-			if (t1 == null) {
-				runJob(r, this.t1);
-			} else {
-				synchronized (t2) {
-					if (t2 == null) {
-						runJob(r, this.t2);
-					} else {
-						addToQueue(r);
-					}
-				}
-			}
+		if (t1 == null) {
+			runJob(r, this.t1);
+		} else if (t2 == null) {
+			runJob(r, this.t2);
+		} else {
+			addToQueue(r);
 		}
 	}
 
@@ -41,6 +35,7 @@ public class ResponsiveUIExecutor implements Executor {
 	 * Otherwise, the thread is reset to null.
 	 */
 	public void runJob(Runnable r, Thread t) {
+		t = new Thread(r);
 		t.start();
 		if (!jobQueue.isEmpty()) {
 			runJob(removeFromQueue(), t);
