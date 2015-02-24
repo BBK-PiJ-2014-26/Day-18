@@ -31,9 +31,9 @@ public class TextLoopMod implements Runnable {
 				r.run();
 			}
 		} else {
+			Executor e = new ResponsiveUIExecutor();
 			for (int i = 0; i < 10; i++) {
 				Runnable r = new TextLoopMod("Thread " + i);
-				Executor e = new TextLoopExecutor();
 				e.execute(r);
 			}
 		}
