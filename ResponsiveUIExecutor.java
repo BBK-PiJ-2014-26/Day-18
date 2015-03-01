@@ -58,4 +58,9 @@ public class ResponsiveUIExecutor implements Executor {
 		Runnable result = jobQueue.remove();
 		return result;
 	}
+
+	public int getMaxPendingTime() {
+		int result = 1000 * jobQueue.size();
+		return result;
+	}
 }
