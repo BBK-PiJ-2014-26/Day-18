@@ -20,3 +20,12 @@
 			this.runTime = runTime;
 		}
 	}
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(runTime);
+		} catch (InterruptedException ex) {
+		}
+	}
+}
